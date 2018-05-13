@@ -1,0 +1,16 @@
+{
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-sass": "*",
+        "gulp-autoprefixer": "*",
+        "gulp-clean-css": "*",
+        "gulp-concat": "*",
+        "gulp-uglify": "*",
+        "gulp-htmlmin": "*",
+        "gulp-clean": "*",
+        "gulp-sequence": "*",
+        "gulp-webserver": "*",
+        "gulp-rev": "*",
+        "gulp-rev-collector": "*"
+    }
+}

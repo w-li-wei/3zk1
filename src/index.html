@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        document.documentElement.style.fontSize = window.innerWidth / 750 * 100 + "px"
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/iconfont.css">
+    <link rel="stylesheet" href="./css/swiper.css">
+
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <i class="icon iconfont icon-yuyin"></i>
+            <div>
+                <p>
+                    <i class="icon iconfont icon-fangdajing"></i>
+                    <input type="text" placeholder="给你推荐">
+                </p>
+            </div>
+            <i class="icon iconfont icon-paihangbang"></i>
+        </header>
+        <section>
+            <nav>
+                <span class="active">音乐</span>
+                <span>视频</span>
+                <span>电台</span>
+            </nav>
+            <div class="gundong">
+                <div class="scroll">
+                    <div class="swiper-container banner">
+                        <div class="swiper-wrapper banner-inner">
+                            <!-- <div class="swiper-slide">
+                                <img src="./imgs/images/1_02.jpg" alt="">
+                            </div> -->
+                        </div>
+                        <div class="swiper-pagination page">
+                        </div>
+                    </div>
+                    <div class="mid">
+                        <p>
+                            <i class="icon iconfont icon-shouyinji"></i>
+                            <span>私人FM</span>
+                        </p>
+                        <p>
+                            <i class="icon iconfont icon-rili"></i>
+                            <span>每日推荐</span>
+                        </p>
+                        <p>
+                            <i class="icon iconfont icon-gedan" style="font-size:24px;"></i>
+                            <span>歌单</span>
+                        </p>
+                        <p>
+                            <i class="icon iconfont icon-paihangbang"></i>
+                            <span>排行榜</span>
+                        </p>
+                    </div>
+                    <div class="list">
+                        <p>为您推荐 > </p>
+                        <div class="musice">
+                            <!-- <dl>
+                                <dd><img src="./imgs/images/1_04.jpg" alt=""></dd>
+                                <dt>风从袖中过的 是夏天啊</dt>
+                            </dl> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        <footer>
+            <p>
+                <i class="icon iconfont icon-4"></i>
+                <span>发现音乐</span>
+            </p>
+            <p>
+                <i class="icon iconfont icon-gedan"></i>
+                <span>我的音乐</span>
+            </p>
+            <p>
+                <i class="icon iconfont icon-haoyou"></i>
+                <span>朋友</span>
+            </p>
+            <p>
+                <i class="icon iconfont icon-zhanghao"></i>
+                <span>账号</span>
+            </p>
+        </footer>
+    </div>
+    <script src="./js/lib/jquery-3.3.1.min.js"></script>
+    <script src="./js/lib/swiper-4.1.6.min.js"></script>
+    <script src="./js/lib/iscroll.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        var myIscroll = new IScroll(".gundong")
+        $.ajax({
+            url: "/api/list",
+            dataType: "json",
+            success: function(list) {
+                var str = "";
+                var liebie = "";
+                $.each(list, function(i, v) {
+                    console.log(v)
+                    $.each(v.banner, function(i, v) {
+                        str += '<div class="swiper-slide"><img src="' + v.url + '" alt=""></div>'
+                    });
+                    $.each(v.list, function(i, v) {
+                        $.each(v.songimg, function(i, v) {
+                            liebie += '  <dl><dd><img src="' + v.img + '" alt=""></dd><dt>' + v.name + '</dt></dl>'
+                        });
+                    });
+                });
+                $(".banner-inner").html(str)
+                $(".musice").html(liebie)
+                var mainsSwiper = new Swiper(".banner", {
+                    autoplay: true,
+                    pagination: {
+                        el: ".page"
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
